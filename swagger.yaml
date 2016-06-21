@@ -1,139 +1,863 @@
-swagger: "2.0"
-info:
-  version: 1.0.0
-  title: DreamJobs
-  description: A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification
-  termsOfService: http://swagger.io/terms/
-  contact:
-    name: Swagger API Team
-    email: foo@example.com
-    url: http://madskristensen.net
-  license:
-    name: MIT
-    url: http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
-host: petstore.swagger.io
-basePath: /v1/api
-schemes:
-  - http
-consumes:
-  - application/json
-produces:
-  - application/json
-paths:
-  /pets:
-    get:
-      description: |
-        Returns all pets from the system that the user has access to
-        Nam sed condimentum est. Maecenas tempor sagittis sapien, nec rhoncus sem sagittis sit amet. Aenean at gravida augue, ac iaculis sem. Curabitur odio lorem, ornare eget elementum nec, cursus id lectus. Duis mi turpis, pulvinar ac eros ac, tincidunt varius justo. In hac habitasse platea dictumst. Integer at adipiscing ante, a sagittis ligula. Aenean pharetra tempor ante molestie imperdiet. Vivamus id aliquam diam. Cras quis velit non tortor eleifend sagittis. Praesent at enim pharetra urna volutpat venenatis eget eget mauris. In eleifend fermentum facilisis. Praesent enim enim, gravida ac sodales sed, placerat id erat. Suspendisse lacus dolor, consectetur non augue vel, vehicula interdum libero. Morbi euismod sagittis libero sed lacinia.
-        Sed tempus felis lobortis leo pulvinar rutrum. Nam mattis velit nisl, eu condimentum ligula luctus nec. Phasellus semper velit eget aliquet faucibus. In a mattis elit. Phasellus vel urna viverra, condimentum lorem id, rhoncus nibh. Ut pellentesque posuere elementum. Sed a varius odio. Morbi rhoncus ligula libero, vel eleifend nunc tristique vitae. Fusce et sem dui. Aenean nec scelerisque tortor. Fusce malesuada accumsan magna vel tempus. Quisque mollis felis eu dolor tristique, sit amet auctor felis gravida. Sed libero lorem, molestie sed nisl in, accumsan tempor nisi. Fusce sollicitudin massa ut lacinia mattis. Sed vel eleifend lorem. Pellentesque vitae felis pretium, pulvinar elit eu, euismod sapien.
-      operationId: findPets
-      parameters:
-        - name: tags
-          in: query
-          description: tags to filter by
-          required: false
-          type: array
-          collectionFormat: csv
-          items:
-            type: string
-        - name: limit
-          in: query
-          description: maximum number of results to return
-          required: false
-          type: integer
-          format: int32
-      responses:
-        200:
-          description: pet response
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Pet'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-    post:
-      description: Creates a new pet in the store.  Duplicates are allowed
-      operationId: addPet
-      parameters:
-        - name: pet
-          in: body
-          description: Pet to add to the store
-          required: true
-          schema:
-            $ref: '#/definitions/NewPet'
-      responses:
-        200:
-          description: pet response
-          schema:
-            $ref: '#/definitions/Pet'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /pets/{id}:
-    get:
-      description: Returns a user based on a single ID, if the user does not have access to the pet
-      operationId: find pet by id
-      parameters:
-        - name: id
-          in: path
-          description: ID of pet to fetch
-          required: true
-          type: integer
-          format: int64
-      responses:
-        200:
-          description: pet response
-          schema:
-            $ref: '#/definitions/Pet'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-    delete:
-      description: deletes a single pet based on the ID supplied
-      operationId: deletePet
-      parameters:
-        - name: id
-          in: path
-          description: ID of pet to delete
-          required: true
-          type: integer
-          format: int64
-      responses:
-        204:
-          description: pet deleted
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-definitions:
-  Pet:
-    allOf:
-      - $ref: '#/definitions/NewPet'
-      - required:
-        - id
-        properties:
-          id:
-            type: integer
-            format: int64
-  NewPet:
-    required:
-      - name
-    properties:
-      name:
-        type: string
-      tag:
-        type: string
-  Error:
-    required:
-      - code
-      - message
-    properties:
-      code:
-        type: integer
-        format: int32
-      message:
-        type: string
+FORMAT: 1A
+HOST: https://api.dreamjobs.com.co/v1
+
+# DreamJobs API
+
+### The Envelope
+Every response is contained by an envelope. That is, each response has a
+    predictable set of keys with which you can expect to interact:
+    
+    {
+        "meta": {
+            "code": 200
+        },
+        "data": {
+            ...
+        },
+        "pagination": {
+            "next_url": "...",
+            "next_max_id": "13872296"
+        }
+    }
+    
+
+#### META
+The meta key is used to communicate extra information about the response to
+    the developer. If all goes well, you'll only ever see a code key with value
+    200. However, sometimes things go wrong, and in that case you might see a
+    response like:
+
+    {
+        "meta": {
+            "error_type": "OAuthException",
+            "code": 400,
+            "error_message": "..."
+        }
+    }
+
+#### DATA
+    The data key is the meat of the response. It may be a list or dictionary,
+    but either way this is where you'll find the data you requested.
+
+# Data Structures
+
+## Company (object)
+
++ logo (string) - Company Logo URL
++ name (string) - Company Name
+
+## Companyreference (object)
+
++ name (string) - Company Name
+
+
+## ContractType (object)
+
++ name (string) - Contract Type name
+
+## Country (object)
+
++ name (string) - Country name
+
+## CountryAdmin1 (object)
+
++ name (string) - Country Administrative Area Level 1 name
+
+## CountryAdmin2 (object)
+
++ name (string) - Country Administrative Area Level 2 name
+
+## Course (object)
+
++ name (string) - Course Name
++ date (string) - Course Date
+
+## Education (object)
+
++ educationlevel (string)
++ institution (string) - Institution Name
++ title (string) - Edcuation Title Name
++ daystart (string) - Format 2015-12-31
++ dayend (string) - Format 2015-12-31
++ country (string)
++ countryAdmin1 (string)
++ countryAdmin2 (string)
+
+## IdType (object)
+
++ name (string) - ID Type name
+
+## Job (object)
+
++ id (string) - Job ID
++ quantity (number) - Number of vacancies
++ company (Company)
++ title (string) - Job Title
++ description (string) - Job Description
++ contracttype (ContractType)
++ published_at (string)
++ expired_at (string)
++ impairment (enum[number])
+    + `-1` - no
+    + `0` - not defined
+    + 1 - yes
++ jobcategory (JobCategory) - Job Category
++ jobtype (JobType) - Job Type
++ travel (enum[number])
+    + `-1` - no
+    + `0` - not defined
+    + 1 - yes
++ move (enum[number])
+    + `-1` - no
+    + `0` - not defined
+    + 1 - yes
++ salary (number) - Job Salary
++ salary_range(number) - Job Salary Range
++ salary_additional (string) - Job Salary Additionals
++ salary_noshow (enum[number]) - Defines if Salary must be 
+    + 0 - no
+    + 1 - yes
++ venue (Venue) - Venue where the Job will be done
++ languages (array[JobLanguage]) - Required Languages and Levels
++ requirements (array[JobRequirement]) - Requirements
+
+## JobCategory (object)
+
++ id (number) - JobCategory ID
++ name (string) - JobCategory Name
+
+## JobRequirement (object)
+
++ type (enum[number])
+    + 0 - exclusive requirement
+    + 1 - non-exclusive requirement
++ description (string) - Job Requirement Description
+
+## JobType (object)
+
++ name (string) - Job Type Name
+
+## JobLanguage
+
++ name (string) - Job Language name
++ level (string) - Job Language Level
+
+## Language
+
++ name (string) - Language name
++ level (string) - Language Level
++ certification (string) - Language Certification
+
+## Profile (object)
+
++ photo (string) - User Photo
++ description (string) - User Self Description
++ career (string) - User Career
++ birthday (string) - User Birthday
++ citizenship (string) - User Citizenship
++ relationship (string) - User Relationship Status
++ children (number) - User Number of Children
++ gender (number) - 0 undefined, 1 male, 2 female
++ idtype (string) - User ID Type
++ idnumber (number) - User ID Number
++ address (string) - User Home Address
++ country (string)
++ countryAdmin1 (string)
++ countryAdmin2 (string)
++ mobile (string) - User Mobile Number
++ telephone (string) - User Home Telephone Number
++ jobcategory (JobCategory) - User Preferred Job Category
++ work_status (number) - 0 not looking for a job, 1 active searching, 2 pasive searching
++ status (number) - User Status
+
+## ProfileFull (object)
+
++ photo (string) - User Photo
++ description (string) - User Self Description
++ career (string) - User Career
++ birthday (string) - User Birthday
++ citizenship (string) - User Citizenship
++ relationship (string) - User Relationship Status
++ children (number) - User Number of Children
++ gender (number) - 0 undefined, 1 male, 2 female
++ idtype (string) - User ID Type
++ idnumber (number) - User ID Number
++ address (string) - User Home Address
++ country (string)
++ countryAdmin1 (string)
++ countryAdmin2 (string)
++ mobile (string) - User Mobile Number
++ telephone (string) - User Home Telephone Number
++ jobcategory (JobCategory) - User Preferred Job Category
++ work_status (number) - 0 not looking for a job, 1 active searching, 2 pasive searching
++ status (number) - User Status
++ education (array[Education])
++ language (array[Language])
++ course (array[Course])
++ skill (array[Skill])
++ work (array[Work])
++ reference (array[Reference])
+
+## Reference (object)
+
++ name (string) - Reference Person Name
++ company (Companyreference) - Company Name
++ position (string) - Work Position Name
++ mobile (string) - Reference Mobile Number
++ telephone (string) - Reference Telephone Number
++ email (string) - Reference Email
++ verified (number) - Reference is verified
+
+## Relationship (object)
+
++ name (string) - Relationship Status name
+
+## Skill (object)
+
++ name (string) - Skill name
++ description (string) - Skill additional description
+
+## User (object)
+
++ id (string) - User ID
++ email (string) - User Email
++ firstname (string) - User Firstname
++ lastname (string) - User Lastname
++ timezone (string) - User Timezone
++ status (number) - User Status
+
+## Venue (object)
+
++ id (number) - Venue ID
++ name (string) - Venue name
++ address (string) - Venue Address
++ country (string)
++ countryAdmin1 (string)
++ countryAdmin2 (string)
++ lat (number)
++ lng (number)
+
+## Work (object)
+
++ company (Companyreference) - Company Name
++ position (string) - Position Name
++ activities (string) - Activities done in this Position
++ name (string) - Reference Person Name
++ mobile (string) - Reference Mobile Number
++ telephone (string) - Reference Telephone Number
++ email (string) - Reference Email
++ daystart (string) - Format 2015-12-31
++ dayend (string) - Format 2015-12-31
++ country (string)
++ countryAdmin1 (string)
++ countryAdmin2 (string)
+
+# Group Global actions
+
+## System obsolecence [/init/{?device_id,app_version}]
+
+### /init [GET]
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (optional).
+`message` response is (optional).
+
++ Parameters
+    + device_id (string, required) - Device UUID
+    + app_version (string, required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            
++ Response 200 (application/json)
+
+        {
+            "obsolete": false,
+            "message": "Mensaje enviado desde el servidor para mostrar al usuario",
+        }
+
++ Response 304 (application/json)
+
+## Get updated Job Categories [/jobcategories/{?timestamp}]
+
+### /jobcategories/ [GET]
+Header `X-API-KEY` (required).
+
++ Parameters
+    + timestamp (number, required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
++ Response 200 (application/json)
+
+        {
+            "timestamp": 1459191332,
+            "jobcategories": [
+                {
+                    "id": 1
+                    "name": "Administración / Oficina"
+                },
+                {
+                    "id": 2
+                    "name": "Almacén / Logística"
+                }
+            ]
+        }
+
++ Response 304 (application/json)
+
+## Get User Completion Profile [/profilecompletion/{timestamp}]
+
+### /profilecompletion/ [GET]
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required).
+
++ Parameters
+    + timestamp (number, required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
++ Response 200 (application/json)
+
+        {
+            "timestamp": 1462838400,
+            "percentage": 60,
+            "incomplete": [
+                {
+                    "name": "Educación",
+                    "required": true
+                },
+                {
+                    "name": "Experiencia",
+                    "required": true
+                }
+            ]
+        }
+
++ Response 304 (application/json)
+
+## User Login [/login]
+
+### /login/ [POST]
+Header `X-API-KEY` (required).
+
++ Request (application/json)
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "user": "email@arara.com or mobile phone number",
+                "password": "secret",
+            }
+
++ Response 200 (application/json)
+    + Attributes (User)
+    
+    + Body
+                
+            {
+              "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+              "email": "user@example.com",
+              "firstname": "Sebastian",
+              "lastname": "Perez",
+              "timezone": "America/Bogota",
+              "status": 1
+            }
+
+## Password Recovery [/recoverpassword]
+
+### /recoverpassword/ [POST]
+Header `X-API-KEY` (required).
+            
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "email": "email@example.com"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+                
+            {
+              "success": true,
+            }
+
++ Response 404 (application/json)
+
+# Group Jobs
+
+## Job Search [/jobs/{?lat,lng,r,jc,sr,q,summary}]
+
+### /jobs [GET]
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (optional)
+Summary: 
+
+    [
+        {
+            "id":"b3235571-d284-11e5-804f-008cfa0709a0",
+            "quantity":1,
+            "company": {
+                "logo":null,
+                "name":"DISPEZ RIO Y MAR SA"
+            },
+            "title":"Administrador(a) Edificio",
+            "venue":{
+                "lat": 4.6890893,
+                "lng": -74.0723214
+            }
+        },
+        ...
+    ]
+
++ Parameters
+    + lat (number, required) - Latitude
+    + lng (number, required) - Longitude
+    + r (number, required) - Radius
+    + jc (number, optional) - Job Category ID
+    + sr (number, optional) - Salary Range
+    + q (string, optional) - Words
+    + summary: "1" (number, optional) - If response should be summarized
+    
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
++ Response 200 (application/json)
+    + Attributes (array[Job])
+    
+    + Body
+    
+            [
+              {
+                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "quantity": 3,
+                "company": {
+                  "logo": "https://example.com/logo.jpg",
+                  "name": "Banco XYZ",
+                },
+                "title": "Chef",
+                "description": "Minimo técnico en cocina con experiencia de minimo 4 años en hoteles y/o restaurantes de alto nivel",
+                "contracttype": {
+                  "name": "Término Fijo"
+                },
+                "published_at": "2015-02-09 10:03:28",
+                "expired_at": "2015-03-09 10:03:28",
+                "impairment": 1,
+                "jobcategory": {
+                  "name": "Contabilidad / Finanzas"
+                },
+                "jobtype": {
+                  "name": "Tiempo Completo"
+                },
+                "travel": 1,
+                "move": 0,
+                "salary": 3500000,
+                "salary_range": 4000000,
+                "salary_additional": "más bonos",
+                "venue": {
+                  "name": "Sede Uno",
+                  "address": "Carrera 12 # 13 - 14",
+                  "country": {
+                    "name": "Colombia"
+                  },
+                  "countryAdmin1": {
+                    "name": "Atlántico"
+                  },
+                  "countryAdmin2": {
+                    "name": "Barranquilla"
+                  },
+                  "lat": 11.004107,
+                  "lng": -74.806981
+                },
+                "languages": [
+                  {
+                    "name": "Inglés",
+                    "level": "Avanzado"
+                  },
+                  {
+                    "name": "Francés",
+                    "level": "Principiante"
+                  }
+                ],
+                "requirements": [
+                  {
+                    "type": 0,
+                    "description": "Que tenga carro"
+                  },
+                  {
+                    "type": 1,
+                    "description": "Mas de 3 años de experiencia en cocina francesa"
+                  }
+                ]
+              }
+            ]
+            
++ Response 404 (application/json)
+
+## User Favorite Jobs [/favorite/{?summary}]
+### /favorite [GET]
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+Summary: 
+
+    [
+        {
+            "id":"b3235571-d284-11e5-804f-008cfa0709a0",
+            "quantity":1,
+            "company": {
+                "logo":null,
+                "name":"DISPEZ RIO Y MAR SA"
+            },
+            "title":"Administrador(a) Edificio",
+            "venue":{
+                "lat": 4.6890893,
+                "lng": -74.0723214
+            }
+        },
+        ...
+    ]
+
++ Parameters
+    + summary: "1" (number, optional) - If response should be summarized
+    
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
++ Response 200 (application/json)
+    + Attributes (array[Job])
+    
+    + Body
+    
+            [
+              {
+                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "quantity": 3,
+                "company": {
+                  "logo": "https://example.com/logo.jpg",
+                  "name": "Banco XYZ",
+                },
+                "title": "Chef",
+                "description": "Minimo técnico en cocina con experiencia de minimo 4 años en hoteles y/o restaurantes de alto nivel",
+                "contracttype": {
+                  "name": "Término Fijo"
+                },
+                "published_at": "2015-02-09 10:03:28",
+                "expired_at": "2015-03-09 10:03:28",
+                "impairment": 1,
+                "jobcategory": {
+                  "name": "Contabilidad / Finanzas"
+                },
+                "jobtype": {
+                  "name": "Tiempo Completo"
+                },
+                "travel": 1,
+                "move": 0,
+                "salary": 3500000,
+                "salary_range": 4000000,
+                "salary_additional": "más bonos",
+                "venue": {
+                  "name": "Sede Uno",
+                  "address": "Carrera 12 # 13 - 14",
+                  "country": {
+                    "name": "Colombia"
+                  },
+                  "countryAdmin1": {
+                    "name": "Atlántico"
+                  },
+                  "countryAdmin2": {
+                    "name": "Barranquilla"
+                  },
+                  "lat": 11.004107,
+                  "lng": -74.806981
+                },
+                "languages": [
+                  {
+                    "name": "Inglés",
+                    "level": "Avanzado"
+                  },
+                  {
+                    "name": "Francés",
+                    "level": "Principiante"
+                  }
+                ],
+                "requirements": [
+                  {
+                    "type": 0,
+                    "description": "Que tenga carro"
+                  },
+                  {
+                    "type": 1,
+                    "description": "Mas de 3 años de experiencia en cocina francesa"
+                  }
+                ]
+              }
+            ]
+                
++ Response 404 (application/json)
+
+## User Recommended Jobs [/recommended/{?summary}]
+### /recommended [GET]
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+Summary: 
+
+    [
+        {
+            "id":"b3235571-d284-11e5-804f-008cfa0709a0",
+            "quantity":1,
+            "company": {
+                "logo":null,
+                "name":"DISPEZ RIO Y MAR SA"
+            },
+            "title":"Administrador(a) Edificio",
+            "venue":{
+                "lat": 4.6890893,
+                "lng": -74.0723214
+            }
+        },
+        ...
+    ]
+
++ Parameters
+    + summary: "1" (number, optional) - If response should be summarized
+    
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
++ Response 200 (application/json)
+    + Attributes (array[Job])
+    
+    + Body
+    
+            [
+              {
+                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "quantity": 3,
+                "company": {
+                  "logo": "https://example.com/logo.jpg",
+                  "name": "Banco XYZ",
+                },
+                "title": "Chef",
+                "description": "Minimo técnico en cocina con experiencia de minimo 4 años en hoteles y/o restaurantes de alto nivel",
+                "contracttype": {
+                  "name": "Término Fijo"
+                },
+                "published_at": "2015-02-09 10:03:28",
+                "expired_at": "2015-03-09 10:03:28",
+                "impairment": 1,
+                "jobcategory": {
+                  "name": "Contabilidad / Finanzas"
+                },
+                "jobtype": {
+                  "name": "Tiempo Completo"
+                },
+                "travel": 1,
+                "move": 0,
+                "salary": 3500000,
+                "salary_range": 4000000,
+                "salary_additional": "más bonos",
+                "venue": {
+                  "name": "Sede Uno",
+                  "address": "Carrera 12 # 13 - 14",
+                  "country": {
+                    "name": "Colombia"
+                  },
+                  "countryAdmin1": {
+                    "name": "Atlántico"
+                  },
+                  "countryAdmin2": {
+                    "name": "Barranquilla"
+                  },
+                  "lat": 11.004107,
+                  "lng": -74.806981
+                },
+                "languages": [
+                  {
+                    "name": "Inglés",
+                    "level": "Avanzado"
+                  },
+                  {
+                    "name": "Francés",
+                    "level": "Principiante"
+                  }
+                ],
+                "requirements": [
+                  {
+                    "type": 0,
+                    "description": "Que tenga carro"
+                  },
+                  {
+                    "type": 1,
+                    "description": "Mas de 3 años de experiencia en cocina francesa"
+                  }
+                ]
+              }
+            ]
+            
++ Response 404 (application/json)
+
+## User Applied Jobs [/apply/{?summary}]
+### /apply [GET]
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+Summary: 
+
+    [
+        {
+            "id":"b3235571-d284-11e5-804f-008cfa0709a0",
+            "quantity":1,
+            "company": {
+                "logo":null,
+                "name":"DISPEZ RIO Y MAR SA"
+            },
+            "title":"Administrador(a) Edificio",
+            "venue":{
+                "lat": 4.6890893,
+                "lng": -74.0723214
+            }
+        },
+        ...
+    ]
+
++ Parameters
+    + summary: "1" (number, optional) - If response should be summarized
+    
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
++ Response 200 (application/json)
+    + Attributes (array[Job])
+    
+    + Body
+    
+            [
+              {
+                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "quantity": 3,
+                "company": {
+                  "logo": "https://example.com/logo.jpg",
+                  "name": "Banco XYZ",
+                },
+                "title": "Chef",
+                "description": "Minimo técnico en cocina con experiencia de minimo 4 años en hoteles y/o restaurantes de alto nivel",
+                "contracttype": {
+                  "name": "Término Fijo"
+                },
+                "published_at": "2015-02-09 10:03:28",
+                "expired_at": "2015-03-09 10:03:28",
+                "impairment": 1,
+                "jobcategory": {
+                  "name": "Contabilidad / Finanzas"
+                },
+                "jobtype": {
+                  "name": "Tiempo Completo"
+                },
+                "travel": 1,
+                "move": 0,
+                "salary": 3500000,
+                "salary_range": 4000000,
+                "salary_additional": "más bonos",
+                "venue": {
+                  "name": "Sede Uno",
+                  "address": "Carrera 12 # 13 - 14",
+                  "country": {
+                    "name": "Colombia"
+                  },
+                  "countryAdmin1": {
+                    "name": "Atlántico"
+                  },
+                  "countryAdmin2": {
+                    "name": "Barranquilla"
+                  },
+                  "lat": 11.004107,
+                  "lng": -74.806981
+                },
+                "languages": [
+                  {
+                    "name": "Inglés",
+                    "level": "Avanzado"
+                  },
+                  {
+                    "name": "Francés",
+                    "level": "Principiante"
+                  }
+                ],
+                "requirements": [
+                  {
+                    "type": 0,
+                    "description": "Que tenga carro"
+                  },
+                  {
+                    "type": 1,
+                    "description": "Mas de 3 años de experiencia en cocina francesa"
+                  }
+                ]
+              }
+            ]
+              
++ Response 404 (application/json)
+
+
+# Group Users
+
+## User Full Profile [/fullprofile/]
+### /fullprofile [GET]
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
++ Response 200 (application/json)
+    + Attributes (array[ProfileFull])
+    
+    + Body
+    
+            
+            
++ Response 404 (application/json)
+
+## User Profile [/profile/]
+### /profile [GET]
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
++ Response 200 (application/json)
+    + Attributes (array[Profile])
+    
+    + Body
+    
+            
+            
++ Response 404 (application/json)
