@@ -48,23 +48,28 @@ The meta key is used to communicate extra information about the response to
 
 ## Companyreference (object)
 
++ id (number) - Companyreference ID
 + name (string) - Company Name
 
 
 ## ContractType (object)
 
++ id (number) - ContractType ID
 + name (string) - Contract Type name
 
 ## Country (object)
 
++ id (number) - Country ID
 + name (string) - Country name
 
 ## CountryAdmin1 (object)
 
++ id (number) - Country Administrative Area Level 1 ID
 + name (string) - Country Administrative Area Level 1 name
 
 ## CountryAdmin2 (object)
 
++ id (number) - Country Administrative Area Level 2 ID
 + name (string) - Country Administrative Area Level 2 name
 
 ## Course (object)
@@ -74,17 +79,28 @@ The meta key is used to communicate extra information about the response to
 
 ## Education (object)
 
-+ educationlevel (string)
++ educationlevel (Educationlevel)
 + institution (string) - Institution Name
 + title (string) - Edcuation Title Name
 + daystart (string) - Format 2015-12-31
 + dayend (string) - Format 2015-12-31
-+ country (string)
-+ countryAdmin1 (string)
-+ countryAdmin2 (string)
++ country (Country)
++ countryAdmin1 (CountryAdmin1)
++ countryAdmin2 (CountryAdmin2)
+
+## Educationlevel (object)
+
++ id (number) - Educationlevel ID
++ name (string) - Educationlevel name
+
+## Gender (object)
+
++ id (number) - Gender ID
++ name (string) - Gender description
 
 ## IdType (object)
 
++ id (number) - IdType ID
 + name (string) - ID Type name
 
 ## Job (object)
@@ -135,6 +151,7 @@ The meta key is used to communicate extra information about the response to
 
 ## JobType (object)
 
++ id (number) - Job Type ID
 + name (string) - Job Type Name
 
 ## JobLanguage
@@ -155,19 +172,19 @@ The meta key is used to communicate extra information about the response to
 + career (string) - User Career
 + birthday (string) - User Birthday
 + citizenship (string) - User Citizenship
-+ relationship (string) - User Relationship Status
++ relationship (Relationship) - User Relationship Status
 + children (number) - User Number of Children
-+ gender (number) - 0 undefined, 1 male, 2 female
-+ idtype (string) - User ID Type
++ gender (Gender) - 0 undefined, 1 male, 2 female
++ idtype (IdType) - User ID Type
 + idnumber (number) - User ID Number
 + address (string) - User Home Address
-+ country (string)
-+ countryAdmin1 (string)
-+ countryAdmin2 (string)
++ country (Country)
++ countryAdmin1 (CountryAdmin1)
++ countryAdmin2 (CountryAdmin2)
 + mobile (string) - User Mobile Number
 + telephone (string) - User Home Telephone Number
 + jobcategory (JobCategory) - User Preferred Job Category
-+ work_status (number) - 0 not looking for a job, 1 active searching, 2 pasive searching
++ work_status (WorkStatus) - 0 not looking for a job, 1 active searching, 2 pasive searching
 + status (number) - User Status
 
 ## ProfileFull (object)
@@ -210,6 +227,7 @@ The meta key is used to communicate extra information about the response to
 
 ## Relationship (object)
 
++ id (number) - Relationship ID
 + name (string) - Relationship Status name
 
 ## Skill (object)
@@ -252,11 +270,18 @@ The meta key is used to communicate extra information about the response to
 + countryAdmin1 (string)
 + countryAdmin2 (string)
 
+## WorkStatus (object)
+
++ id (number) - WorkStatus ID
++ name (string) - WorkStatus description
+
+
 # Group Global actions
 
-## System obsolecence [/init/{?device_id,app_version}]
+## /init/{?device_id,app_version}
+System obsolecence
 
-### /init [GET]
+### GET
 Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (optional).
 `message` response is (optional).
 
@@ -279,9 +304,10 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (optional).
 
 + Response 304 (application/json)
 
-## Get updated Job Categories [/jobcategories/{?timestamp}]
+## /jobcategories/{?timestamp}
+Get updated Job Categories
 
-### /jobcategories/ [GET]
+### GET
 Header `X-API-KEY` (required).
 
 + Parameters
@@ -310,9 +336,10 @@ Header `X-API-KEY` (required).
 
 + Response 304 (application/json)
 
-## Get User Completion Profile [/profilecompletion/{timestamp}]
+## /profilecompletion/{?timestamp}
+Get User Completion Profile
 
-### /profilecompletion/ [GET]
+### GET
 Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required).
 
 + Parameters
@@ -343,9 +370,151 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required).
 
 + Response 304 (application/json)
 
-## User Login [/login]
+## /idtype/
+ID Type list
 
-### /login/ [POST]
+### GET
+Header `X-API-KEY` (required).
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 2,
+                "name": "Cedula de Ciudadanía"
+            },
+            {
+                "id": 3,
+                "name": "Cedula de Extranjería"
+            }
+        ]
+
++ Response 404 (application/json)
+
+## /relationship/
+Relationship Type list
+
+### GET
+Header `X-API-KEY` (required).
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 2,
+                "name": "Casado"
+            },
+            {
+                "id": 3,
+                "name": "Soltero"
+            }
+        ]
+
++ Response 404 (application/json)
+
+## /gender/
+Gender Type list
+
+### GET
+Header `X-API-KEY` (required).
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "name": "Hombre"
+            },
+            {
+                "id": 2,
+                "name": "Mujer"
+            }
+        ]
+
++ Response 404 (application/json)
+
+## /location/{?query}
+City Location List
+
+### GET
+Header `X-API-KEY` (required).
+
++ Parameters
+    + query (string, required)
+    
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "249-12-345",
+                "name": "Bucaramanga, Santander, Colombia"
+            },
+            {
+                "id": "249-12-961",
+                "name": "Barrancabermeja, Santander, Colombia"
+            }
+        ]
+
++ Response 404 (application/json)
+
+## /presignup
+PreSignup registration
+
+### POST
+Header `X-API-KEY` (required).
+
++ Request (application/json)
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "firstname": "Sebastian",
+                "email": "user@example.com",
+                "location": "123-456-789",
+                "jobcategory_id": 1234
+                
+            }
+
++ Response 200 (application/json)
+    
+    + Body
+                
+            {
+                "firstname": "Sebastian",
+                "email": "user@example.com",
+                "city": "123-456-789",
+                "jobcategory_id": 1234
+                
+            }
+
+
+## /login
+User Login
+
+### POST
 Header `X-API-KEY` (required).
 
 + Request (application/json)
@@ -371,12 +540,14 @@ Header `X-API-KEY` (required).
               "firstname": "Sebastian",
               "lastname": "Perez",
               "timezone": "America/Bogota",
-              "status": 1
+              "status": 1,
+              "message": "El usuario se encuentra suspendido"
             }
 
-## Password Recovery [/recoverpassword]
+## /recoverpassword
+Password Recovery
 
-### /recoverpassword/ [POST]
+### POST
 Header `X-API-KEY` (required).
             
 + Request
@@ -396,15 +567,99 @@ Header `X-API-KEY` (required).
                 
             {
               "success": true,
+              "message": "El correo no se encuentra registrado"
             }
+
++ Response 404 (application/json)
+
+## /educationlevel/
+Education Level list
+
+### GET
+Header `X-API-KEY` (required).
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "name": "Primaria"
+            },
+            {
+                "id": 2,
+                "name": "Bachiller"
+            }
+        ]
+
++ Response 404 (application/json)
+
+## /languagelevel/
+Language Level list
+
+### GET
+Header `X-API-KEY` (required).
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "level": "A0",
+                "name": "Principiante",
+                "description": "No tiene conocimientos previos del idioma."
+            },
+            {
+                 "id": 2,
+                "level": "A1",
+                "name": "Básico",
+                "description": "Puede entender frases hechas, estructuras básicas y formas oraciones simples."
+            }
+        ]
+
++ Response 404 (application/json)
+
+## /languagename/
+Language Name list
+
+### GET
+Header `X-API-KEY` (required).
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "name": "chino"
+            },
+            {
+                "id": 2,
+                "name": "español"
+            }
+        ]
 
 + Response 404 (application/json)
 
 # Group Jobs
 
-## Job Search [/jobs/{?lat,lng,r,jc,sr,q,summary}]
+## /job/{?lat,lng,r,jc,sr,q,summary}
+Job Search
 
-### /jobs [GET]
+### GET
 Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (optional)
 Summary: 
 
@@ -499,10 +754,12 @@ Summary:
                 ],
                 "requirements": [
                   {
+                    "id": 1234,
                     "type": 0,
                     "description": "Que tenga carro"
                   },
                   {
+                    "id": 1235,
                     "type": 1,
                     "description": "Mas de 3 años de experiencia en cocina francesa"
                   }
@@ -512,8 +769,10 @@ Summary:
             
 + Response 404 (application/json)
 
-## User Favorite Jobs [/favorite/{?summary}]
-### /favorite [GET]
+## /favorite/{?summary}
+User Favorite Marked Jobs
+
+### GET
 Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
 Summary: 
 
@@ -544,213 +803,6 @@ Summary:
              X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
 
 + Response 200 (application/json)
-    + Attributes (array[Job])
-    
-    + Body
-    
-            [
-              {
-                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-                "quantity": 3,
-                "company": {
-                  "logo": "https://example.com/logo.jpg",
-                  "name": "Banco XYZ",
-                },
-                "title": "Chef",
-                "description": "Minimo técnico en cocina con experiencia de minimo 4 años en hoteles y/o restaurantes de alto nivel",
-                "contracttype": {
-                  "name": "Término Fijo"
-                },
-                "published_at": "2015-02-09 10:03:28",
-                "expired_at": "2015-03-09 10:03:28",
-                "impairment": 1,
-                "jobcategory": {
-                  "name": "Contabilidad / Finanzas"
-                },
-                "jobtype": {
-                  "name": "Tiempo Completo"
-                },
-                "travel": 1,
-                "move": 0,
-                "salary": 3500000,
-                "salary_range": 4000000,
-                "salary_additional": "más bonos",
-                "venue": {
-                  "name": "Sede Uno",
-                  "address": "Carrera 12 # 13 - 14",
-                  "country": {
-                    "name": "Colombia"
-                  },
-                  "countryAdmin1": {
-                    "name": "Atlántico"
-                  },
-                  "countryAdmin2": {
-                    "name": "Barranquilla"
-                  },
-                  "lat": 11.004107,
-                  "lng": -74.806981
-                },
-                "languages": [
-                  {
-                    "name": "Inglés",
-                    "level": "Avanzado"
-                  },
-                  {
-                    "name": "Francés",
-                    "level": "Principiante"
-                  }
-                ],
-                "requirements": [
-                  {
-                    "type": 0,
-                    "description": "Que tenga carro"
-                  },
-                  {
-                    "type": 1,
-                    "description": "Mas de 3 años de experiencia en cocina francesa"
-                  }
-                ]
-              }
-            ]
-                
-+ Response 404 (application/json)
-
-## User Recommended Jobs [/recommended/{?summary}]
-### /recommended [GET]
-Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
-Summary: 
-
-    [
-        {
-            "id":"b3235571-d284-11e5-804f-008cfa0709a0",
-            "quantity":1,
-            "company": {
-                "logo":null,
-                "name":"DISPEZ RIO Y MAR SA"
-            },
-            "title":"Administrador(a) Edificio",
-            "venue":{
-                "lat": 4.6890893,
-                "lng": -74.0723214
-            }
-        },
-        ...
-    ]
-
-+ Parameters
-    + summary: "1" (number, optional) - If response should be summarized
-    
-+ Request
-    + Headers
-
-             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
-             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
-
-+ Response 200 (application/json)
-    + Attributes (array[Job])
-    
-    + Body
-    
-            [
-              {
-                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-                "quantity": 3,
-                "company": {
-                  "logo": "https://example.com/logo.jpg",
-                  "name": "Banco XYZ",
-                },
-                "title": "Chef",
-                "description": "Minimo técnico en cocina con experiencia de minimo 4 años en hoteles y/o restaurantes de alto nivel",
-                "contracttype": {
-                  "name": "Término Fijo"
-                },
-                "published_at": "2015-02-09 10:03:28",
-                "expired_at": "2015-03-09 10:03:28",
-                "impairment": 1,
-                "jobcategory": {
-                  "name": "Contabilidad / Finanzas"
-                },
-                "jobtype": {
-                  "name": "Tiempo Completo"
-                },
-                "travel": 1,
-                "move": 0,
-                "salary": 3500000,
-                "salary_range": 4000000,
-                "salary_additional": "más bonos",
-                "venue": {
-                  "name": "Sede Uno",
-                  "address": "Carrera 12 # 13 - 14",
-                  "country": {
-                    "name": "Colombia"
-                  },
-                  "countryAdmin1": {
-                    "name": "Atlántico"
-                  },
-                  "countryAdmin2": {
-                    "name": "Barranquilla"
-                  },
-                  "lat": 11.004107,
-                  "lng": -74.806981
-                },
-                "languages": [
-                  {
-                    "name": "Inglés",
-                    "level": "Avanzado"
-                  },
-                  {
-                    "name": "Francés",
-                    "level": "Principiante"
-                  }
-                ],
-                "requirements": [
-                  {
-                    "type": 0,
-                    "description": "Que tenga carro"
-                  },
-                  {
-                    "type": 1,
-                    "description": "Mas de 3 años de experiencia en cocina francesa"
-                  }
-                ]
-              }
-            ]
-            
-+ Response 404 (application/json)
-
-## User Applied Jobs [/apply/{?summary}]
-### /apply [GET]
-Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
-Summary: 
-
-    [
-        {
-            "id":"b3235571-d284-11e5-804f-008cfa0709a0",
-            "quantity":1,
-            "company": {
-                "logo":null,
-                "name":"DISPEZ RIO Y MAR SA"
-            },
-            "title":"Administrador(a) Edificio",
-            "venue":{
-                "lat": 4.6890893,
-                "lng": -74.0723214
-            }
-        },
-        ...
-    ]
-
-+ Parameters
-    + summary: "1" (number, optional) - If response should be summarized
-    
-+ Request
-    + Headers
-
-             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
-             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
-
-+ Response 200 (application/json)
-    + Attributes (array[Job])
     
     + Body
     
@@ -821,11 +873,323 @@ Summary:
               
 + Response 404 (application/json)
 
+### POST
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "job_id" : "b3235571-d284-11e5-804f-008cfa0709a0"
+            }
+
++ Response 201 (application/json)
+    
+    + Body
+    
+            {
+                "job_id" : "b3235571-d284-11e5-804f-008cfa0709a0",
+                "user_id" : "b9a402d0-23a5-11e6-9513-0800274f2cef",
+            }
+              
++ Response 404 (application/json)
+
+### DELETE
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "job_id" : "b3235571-d284-11e5-804f-008cfa0709a0"
+            }
+
++ Response 200 (application/json)
+              
++ Response 404 (application/json)
+
+## /recommended/{?summary}
+User Recommended Jobs
+
+### GET 
+
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+Summary: 
+
+    [
+        {
+            "id":"b3235571-d284-11e5-804f-008cfa0709a0",
+            "quantity":1,
+            "company": {
+                "logo":null,
+                "name":"DISPEZ RIO Y MAR SA"
+            },
+            "title":"Administrador(a) Edificio",
+            "venue":{
+                "lat": 4.6890893,
+                "lng": -74.0723214
+            }
+        },
+        ...
+    ]
+
++ Parameters
+    + summary: "1" (number, optional) - If response should be summarized
+    
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
++ Response 200 (application/json)
+    + Attributes (array[Job])
+    
+    + Body
+    
+            [
+              {
+                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "quantity": 3,
+                "company": {
+                  "logo": "https://example.com/logo.jpg",
+                  "name": "Banco XYZ",
+                },
+                "title": "Chef",
+                "description": "Minimo técnico en cocina con experiencia de minimo 4 años en hoteles y/o restaurantes de alto nivel",
+                "contracttype": {
+                  "name": "Término Fijo"
+                },
+                "published_at": "2015-02-09 10:03:28",
+                "expired_at": "2015-03-09 10:03:28",
+                "impairment": 1,
+                "jobcategory": {
+                  "name": "Contabilidad / Finanzas"
+                },
+                "jobtype": {
+                  "name": "Tiempo Completo"
+                },
+                "travel": 1,
+                "move": 0,
+                "salary": 3500000,
+                "salary_range": 4000000,
+                "salary_additional": "más bonos",
+                "venue": {
+                  "name": "Sede Uno",
+                  "address": "Carrera 12 # 13 - 14",
+                  "country": {
+                    "name": "Colombia"
+                  },
+                  "countryAdmin1": {
+                    "name": "Atlántico"
+                  },
+                  "countryAdmin2": {
+                    "name": "Barranquilla"
+                  },
+                  "lat": 11.004107,
+                  "lng": -74.806981
+                },
+                "languages": [
+                  {
+                    "name": "Inglés",
+                    "level": "Avanzado"
+                  },
+                  {
+                    "name": "Francés",
+                    "level": "Principiante"
+                  }
+                ],
+                "requirements": [
+                  {
+                    "type": 0,
+                    "description": "Que tenga carro"
+                  },
+                  {
+                    "type": 1,
+                    "description": "Mas de 3 años de experiencia en cocina francesa"
+                  }
+                ]
+              }
+            ]
+            
++ Response 404 (application/json)
+
+## /apply/{?summary}
+User Applied Jobs
+
+### GET
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+Summary: 
+
+    [
+        {
+            "id":"b3235571-d284-11e5-804f-008cfa0709a0",
+            "quantity":1,
+            "company": {
+                "logo":null,
+                "name":"DISPEZ RIO Y MAR SA"
+            },
+            "title":"Administrador(a) Edificio",
+            "venue":{
+                "lat": 4.6890893,
+                "lng": -74.0723214
+            }
+        },
+        ...
+    ]
+
++ Parameters
+    + summary: "1" (number, optional) - If response should be summarized
+    
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
++ Response 200 (application/json)
+    
+    + Body
+    
+            [
+              {
+                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "quantity": 3,
+                "company": {
+                  "logo": "https://example.com/logo.jpg",
+                  "name": "Banco XYZ",
+                },
+                "title": "Chef",
+                "description": "Minimo técnico en cocina con experiencia de minimo 4 años en hoteles y/o restaurantes de alto nivel",
+                "contracttype": {
+                  "name": "Término Fijo"
+                },
+                "published_at": "2015-02-09 10:03:28",
+                "expired_at": "2015-03-09 10:03:28",
+                "impairment": 1,
+                "jobcategory": {
+                  "name": "Contabilidad / Finanzas"
+                },
+                "jobtype": {
+                  "name": "Tiempo Completo"
+                },
+                "travel": 1,
+                "move": 0,
+                "salary": 3500000,
+                "salary_range": 4000000,
+                "salary_additional": "más bonos",
+                "venue": {
+                  "name": "Sede Uno",
+                  "address": "Carrera 12 # 13 - 14",
+                  "country": {
+                    "name": "Colombia"
+                  },
+                  "countryAdmin1": {
+                    "name": "Atlántico"
+                  },
+                  "countryAdmin2": {
+                    "name": "Barranquilla"
+                  },
+                  "lat": 11.004107,
+                  "lng": -74.806981
+                },
+                "languages": [
+                  {
+                    "name": "Inglés",
+                    "level": "Avanzado"
+                  },
+                  {
+                    "name": "Francés",
+                    "level": "Principiante"
+                  }
+                ],
+                "requirements": [
+                  {
+                    "type": 0,
+                    "description": "Que tenga carro"
+                  },
+                  {
+                    "type": 1,
+                    "description": "Mas de 3 años de experiencia en cocina francesa"
+                  }
+                ]
+              }
+            ]
+              
++ Response 404 (application/json)
+
+### POST
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "job_id" : "b3235571-d284-11e5-804f-008cfa0709a0",
+                "requirements": [
+                  {
+                    "id": 1234,
+                    "status": 0
+                  },
+                  {
+                    "id": 1235,
+                    "status": 1
+                  }
+                ]
+            }
+
++ Response 201 (application/json)
+    
+    + Body
+    
+            {
+                "job_id" : "b3235571-d284-11e5-804f-008cfa0709a0",
+                "user_id" : "b9a402d0-23a5-11e6-9513-0800274f2cef"
+            }
+              
++ Response 404 (application/json)
+
+### DELETE
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "job_id" : "b3235571-d284-11e5-804f-008cfa0709a0"
+            }
+
++ Response 200 (application/json)
+              
++ Response 404 (application/json)
+
 
 # Group Users
 
-## User Full Profile [/fullprofile/]
-### /fullprofile [GET]
+## /user/
+Get User Info
+
+### GET
 Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
 
 + Request
@@ -835,16 +1199,85 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
 
 + Response 200 (application/json)
-    + Attributes (array[ProfileFull])
-    
-    + Body
+    + Attributes (User)
     
             
             
 + Response 404 (application/json)
 
-## User Profile [/profile/]
-### /profile [GET]
+### POST
+User signup
+Header `X-API-KEY` (required)
+
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "email": "user@example.com",
+                "password": "userpassword",
+                "firstname": "Sebastian",
+                "lastname": "Perez",
+                "timezone": "America/Bogota"
+            }
+
++ Response 201 (application/json)
+    
+    + Body
+    
+            {
+                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "email": "user@example.com",
+                "firstname": "Sebastian",
+                "lastname": "Perez",
+                "timezone": "America/Bogota",
+                "status": 1
+            }
+              
++ Response 404 (application/json)
+
+### PUT
+Edit User Info
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "email": "user@example.com",
+                "password": "userpassword",
+                "firstname": "Sebastian",
+                "lastname": "Perez",
+                "timezone": "America/Bogota"
+            }
+
++ Response 200 (application/json)
+    
+    + Body
+    
+            {
+                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "email": "user@example.com",
+                "firstname": "Sebastian",
+                "lastname": "Perez",
+                "timezone": "America/Bogota",
+                "status": 1
+            }
+              
++ Response 404 (application/json)
+
+## /fullprofile/
+User Full Profile
+
+### GET
 Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
 
 + Request
@@ -854,10 +1287,127 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
 
 + Response 200 (application/json)
-    + Attributes (array[Profile])
+    + Attributes (ProfileFull)
+
++ Response 404 (application/json)
+
+## /profile/
+User Profile
+
+### GET
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
++ Response 200 (application/json)
+    + Attributes (Profile)
+            
++ Response 404 (application/json)
+
+### POST
+Create User Profile
+
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
     
     + Body
     
-            
+            {
+                "description": "",
+                "career": "",
+                "birthday": "2015-12-31",
+                "citizenship": "aleman",
+                "relationship_id": 1,
+                "children": 0,
+                "gender_id": 2,
+                "idtype_id": 1,
+                "idnumber": 0,
+                "address": "",
+                "location": "123-456-789",
+                "mobile": "",
+                "telephone": "",
+                "jobcategory_id": "32",
+                "work_status": 0
+            }
+
++ Response 201 (application/json)
+    + Attributes (Profile)
+              
++ Response 404 (application/json)
+
+### PUT
+Update User Profile
+
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "description": "",
+                "career": "",
+                "birthday": "2015-12-31",
+                "citizenship": "aleman",
+                "relationship_id": 1,
+                "children": 0,
+                "gender_id": 2,
+                "idtype_id": 1,
+                "idnumber": 0,
+                "address": "",
+                "location": "123-456-789",
+                "mobile": "",
+                "telephone": "",
+                "jobcategory_id": "32",
+                "work_status": 0
+            }
+
++ Response 201 (application/json)
+    + Attributes (Profile)
+              
++ Response 404 (application/json)
+
+## /education/
+User Education
+
+### GET
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
++ Response 200 (application/json)
+    + Attributes (array[Education])
             
 + Response 404 (application/json)
+
+## /language/
+User Languages
+
+## /skill/
+User Skills
+
+## /course/
+User Courses
+
+## /work/
+User Previous Work
+
+## /reference/
+User Work and Personal References
