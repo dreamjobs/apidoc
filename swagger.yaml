@@ -84,9 +84,6 @@ The meta key is used to communicate extra information about the response to
 + title (string) - Edcuation Title Name
 + daystart (string) - Format 2015-12-31
 + dayend (string) - Format 2015-12-31
-+ country (Country)
-+ countryAdmin1 (CountryAdmin1)
-+ countryAdmin2 (CountryAdmin2)
 
 ## Educationlevel (object)
 
@@ -154,16 +151,30 @@ The meta key is used to communicate extra information about the response to
 + id (number) - Job Type ID
 + name (string) - Job Type Name
 
-## JobLanguage
+## JobLanguage (object)
 
 + name (string) - Job Language name
 + level (string) - Job Language Level
 
-## Language
+## Language (object)
 
-+ name (string) - Language name
-+ level (string) - Language Level
++ id (number) - Language ID
++ name (Languagename) - Language name
++ level (Languagelevel) - Language Level
++ description (string) - Language Comments
 + certification (string) - Language Certification
+
+## Languagename (object)
+
++ id (number) - Language ID
++ name (string) - Language Name
+
+## Languagelevel (object)
+
++ id (number) - Languagelevel ID
++ level (string) - Languagelevel
++ name (string) - Languagelevel Name
++ description (string) - Languagelevel Description
 
 ## Profile (object)
 
@@ -1397,8 +1408,319 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             
 + Response 404 (application/json)
 
+### POST
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "educationlevel_id": "5",
+                "institute": "Universidad del Rosario",
+                "title": "Abogado",
+                "daystart": "2001-12-31",
+                "dayend": "2007-12-31"
+            }
+
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "educationlevel": {
+                    "id": 5,
+                    "name": "Universitario"
+                }
+                "institute": "Universidad del Rosario",
+                "title": "Abogado",
+                "daystart": "2001-12-31",
+                "dayend": "2007-12-31",
+                "profilecompletion": {
+                    "timestamp": 1462838400,
+                    "percentage": 60,
+                    "incomplete": [
+                        {
+                            "name": "Educación",
+                            "required": true
+                        },
+                        {
+                            "name": "Experiencia",
+                            "required": true
+                        }
+                    ]
+                }
+            }
+            
++ Response 404 (application/json)
+
+### PUT
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "id": 12344,
+                "educationlevel_id": "5",
+                "institute": "Universidad del Rosario",
+                "title": "Abogado",
+                "daystart": "2001-12-31",
+                "dayend": "2007-12-31"
+            }
+
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "educationlevel": {
+                    "id": 5,
+                    "name": "Universitario"
+                }
+                "institute": "Universidad del Rosario",
+                "title": "Abogado",
+                "daystart": "2001-12-31",
+                "dayend": "2007-12-31",
+                "profilecompletion": {
+                    "timestamp": 1462838400,
+                    "percentage": 60,
+                    "incomplete": [
+                        {
+                            "name": "Educación",
+                            "required": true
+                        },
+                        {
+                            "name": "Experiencia",
+                            "required": true
+                        }
+                    ]
+                }
+            }
+            
++ Response 404 (application/json)
+
+### DELETE
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "id": 12344
+            }
+
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "profilecompletion": {
+                    "timestamp": 1462838400,
+                    "percentage": 60,
+                    "incomplete": [
+                        {
+                            "name": "Educación",
+                            "required": true
+                        },
+                        {
+                            "name": "Experiencia",
+                            "required": true
+                        }
+                    ]
+                }
+            }
+            
++ Response 404 (application/json)
+
 ## /language/
 User Languages
+
+### GET
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
++ Response 200 (application/json)
+    + Attributes (array[Language])
+    
+    + Body
+    
+            [
+                {
+                    "id": 12345,
+                    "languagename": {
+                      "id": 0,
+                      "name": "inglés"
+                    },
+                    "languagelevel": {
+                      "id": 1,
+                      "level": "A0",
+                      "name": "Principiante"
+                    },
+                    "description": "TOEFL",
+                    "certification": "1"
+                }
+            ]
+                    
++ Response 404 (application/json)
+
+### POST
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "languagename_id": 1,
+                "languagelevel_id": 1,
+                "description": "TOEFL",
+                "certification": "1"
+            }
+
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "id": 1235,
+                "languagename": {
+                    "id": 0,
+                    "name": "inglés"
+                },
+                "languagelevel": {
+                    "id": 1,
+                    "level": "A0",
+                    "name": "Principiante"
+                },
+                "description": "TOEFL",
+                "certification": "1",
+                "profilecompletion": {
+                    "timestamp": 1462838400,
+                    "percentage": 60,
+                    "incomplete": [
+                        {
+                            "name": "Educación",
+                            "required": true
+                        },
+                        {
+                            "name": "Experiencia",
+                            "required": true
+                        }
+                    ]
+                }
+            }
+            
++ Response 404 (application/json)
+
+### PUT
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "id": 1235
+                "languagename_id": 1,
+                "languagelevel_id": 1,
+                "description": "TOEFL",
+                "certification": "1"
+            }
+
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "id": 1235,
+                "languagename": {
+                    "id": 0,
+                    "name": "inglés"
+                },
+                "languagelevel": {
+                    "id": 1,
+                    "level": "A0",
+                    "name": "Principiante"
+                },
+                "description": "TOEFL",
+                "certification": "1",
+                "profilecompletion": {
+                    "timestamp": 1462838400,
+                    "percentage": 60,
+                    "incomplete": [
+                        {
+                            "name": "Educación",
+                            "required": true
+                        },
+                        {
+                            "name": "Experiencia",
+                            "required": true
+                        }
+                    ]
+                }
+            }
+            
++ Response 404 (application/json)
+
+### DELETE
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "id": 12344
+            }
+
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "profilecompletion": {
+                    "timestamp": 1462838400,
+                    "percentage": 60,
+                    "incomplete": [
+                        {
+                            "name": "Educación",
+                            "required": true
+                        },
+                        {
+                            "name": "Experiencia",
+                            "required": true
+                        }
+                    ]
+                }
+            }
+            
++ Response 404 (application/json)
 
 ## /skill/
 User Skills
