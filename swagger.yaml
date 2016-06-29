@@ -198,7 +198,7 @@ The meta key is used to communicate extra information about the response to
 + mobile (string) - User Mobile Number
 + telephone (string) - User Home Telephone Number
 + jobcategory (JobCategory) - User Preferred Job Category
-+ work_status (WorkStatus) - 0 not looking for a job, 1 active searching, 2 pasive searching
++ workstatus (WorkStatus) - 0 not looking for a job, 1 active searching, 2 pasive searching
 + status (number) - User Status
 
 ## ProfileFull (object)
@@ -220,7 +220,7 @@ The meta key is used to communicate extra information about the response to
 + mobile (string) - User Mobile Number
 + telephone (string) - User Home Telephone Number
 + jobcategory (JobCategory) - User Preferred Job Category
-+ work_status (number) - 0 not looking for a job, 1 active searching, 2 pasive searching
++ workstatus (WorkStatus) - 1 active searching, 2 pasive searching, 3 not looking for a job
 + status (number) - User Status
 + education (array[Education])
 + language (array[Language])
@@ -662,6 +662,32 @@ Header `X-API-KEY` (required).
             {
                 "id": 2,
                 "name": "español"
+            }
+        ]
+
++ Response 404 (application/json)
+
+## /workstatus/
+Work Status list
+
+### GET
+Header `X-API-KEY` (required).
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "name": "Búsqueda Activa"
+            },
+            {
+                "id": 2,
+                "name": "Búsqueda Pasiva"
             }
         ]
 
@@ -1364,8 +1390,8 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                 "location": "123-456-789",
                 "mobile": "",
                 "telephone": "",
-                "jobcategory_id": "32",
-                "work_status": 0
+                "jobcategory_id": 32,
+                "workstatus_id": 1
             }
 
 + Response 201 (application/json)
@@ -1401,7 +1427,7 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                 "mobile": "",
                 "telephone": "",
                 "jobcategory_id": "32",
-                "work_status": 0
+                "workstatus_id": 1
             }
 
 + Response 201 (application/json)
