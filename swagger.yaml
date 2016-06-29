@@ -314,23 +314,25 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required).
     
 + Response 200 (application/json)
 
-        {
-            "company": {
-                "name": "Empresa SA"
-            },
-            "user": {
-                "firstname": "Alfredo",
-                "lastname": "Alfredo"
-            },
-            "job": {
-                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-                "title": "Panadero",
-                "published_at": "2016-12-31",
-                "status": "1"
-            },
-            "title": "Favor enviar Certificados",
-            "content": "Enviar Certificado de Altura",
-        }
+        [
+            {
+                "company": {
+                    "name": "Empresa SA"
+                },
+                "user": {
+                    "firstname": "Alfredo",
+                    "lastname": "Alfredo"
+                },
+                "job": {
+                    "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                    "title": "Panadero",
+                    "published_at": "2016-12-31",
+                    "status": "1"
+                },
+                "title": "Favor enviar Certificados",
+                "content": "Enviar Certificado de Altura",
+            }
+        ]
 
 + Response 304 (application/json)
 
