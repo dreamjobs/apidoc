@@ -321,7 +321,7 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required).
                 },
                 "user": {
                     "firstname": "Alfredo",
-                    "lastname": "Alfredo"
+                    "lastname": "Caseros"
                 },
                 "job": {
                     "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
