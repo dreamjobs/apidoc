@@ -101,6 +101,15 @@ The meta key is used to communicate extra information about the response to
 + id (number) - IdType ID
 + name (string) - ID Type name
 
+## Inbox (object)
+
++ id (number) - IdType ID
++ company (Company) - Message Sender
++ user (User) - Message Receiver
++ job (Job) - Message Job Subject
++ title (string) - Message Title
++ content (string) - Message Content
+
 ## Job (object)
 
 + id (string) - Job ID
@@ -290,6 +299,40 @@ The meta key is used to communicate extra information about the response to
 
 
 # Group Global actions
+
+## /inbox/
+Get User Inbox
+
+### GET
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required).
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
++ Response 200 (application/json)
+
+        {
+            "company": {
+                "name": "Empresa SA"
+            },
+            "user": {
+                "firstname": "Alfredo",
+                "lastname": "Alfredo"
+            },
+            "job": {
+                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "title": "Panadero",
+                "published_at": "2016-12-31",
+                "status": "1"
+            },
+            "title": "Favor enviar Certificados",
+            "content": "Enviar Certificado de Altura",
+        }
+
++ Response 304 (application/json)
 
 ## /init/{?device_id,app_version}
 System obsolecence
@@ -548,13 +591,13 @@ Header `X-API-KEY` (required).
     + Body
                 
             {
-              "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-              "email": "user@example.com",
-              "firstname": "Sebastian",
-              "lastname": "Perez",
-              "timezone": "America/Bogota",
-              "status": 1,
-              "message": "El usuario se encuentra suspendido"
+                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "email": "user@example.com",
+                "firstname": "Sebastian",
+                "lastname": "Perez",
+                "timezone": "America/Bogota",
+                "status": 1,
+                "message": "El usuario se encuentra suspendido"
             }
 
 ## /recoverpassword
