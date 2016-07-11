@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://api.dreamjobs.com.co/v1
+HOST: https://api.staging.dreamjobs.com.co/v1
 
 # DreamJobs API
 
@@ -1229,6 +1229,42 @@ Summary:
 + Response 404 (application/json)
 
 ### POST
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+             X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "job_id" : "b3235571-d284-11e5-804f-008cfa0709a0",
+                "requirements": [
+                  {
+                    "id": 1234,
+                    "status": 0
+                  },
+                  {
+                    "id": 1235,
+                    "status": 1
+                  }
+                ]
+            }
+
++ Response 201 (application/json)
+    
+    + Body
+    
+            {
+                "job_id" : "b3235571-d284-11e5-804f-008cfa0709a0",
+                "user_id" : "b9a402d0-23a5-11e6-9513-0800274f2cef"
+            }
+              
++ Response 404 (application/json)
+
+### PUT
 Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
 
 + Request
