@@ -740,7 +740,7 @@ Header `X-API-KEY` (required).
 
 # Group Jobs
 
-## /job/{?lat,lng,r,jc,sr,q,summary}
+## /job/{?id,lat,lng,r,jc,sr,q,summary}
 Job Search
 
 ### GET
@@ -767,6 +767,7 @@ Summary:
     ]
 
 + Parameters
+    + id (string, optional) - Job ID
     + lat (number, required) - Latitude
     + lng (number, required) - Longitude
     + r (number, required) - Radius
@@ -796,23 +797,15 @@ Summary:
                 },
                 "title": "Chef",
                 "description": "Minimo técnico en cocina con experiencia de minimo 4 años en hoteles y/o restaurantes de alto nivel",
-                "contracttype": {
-                  "name": "Término Fijo"
-                },
+                "contracttype": "Término Fijo",
                 "published_at": "2015-02-09 10:03:28",
                 "expired_at": "2015-03-09 10:03:28",
-                "impairment": 1,
-                "jobcategory": {
-                  "name": "Contabilidad / Finanzas"
-                },
-                "jobtype": {
-                  "name": "Tiempo Completo"
-                },
-                "travel": 1,
-                "move": 0,
-                "salary": 3500000,
-                "salary_range": 4000000,
-                "salary_additional": "más bonos",
+                "impairment": true,
+                "jobcategory": "Contabilidad / Finanzas",
+                "jobtype": "Tiempo Completo",
+                "travel": false,
+                "move": true,
+                "salary": "$ 123,456,789 mas bonos",
                 "venue": {
                   "name": "Sede Uno",
                   "address": "Carrera 12 # 13 - 14",
@@ -841,17 +834,18 @@ Summary:
                 "requirements": [
                   {
                     "id": 1234,
-                    "type": 0,
+                    "mandatory": true,
                     "description": "Que tenga carro"
                   },
                   {
                     "id": 1235,
-                    "type": 1,
+                    "mandatory": false,
                     "description": "Mas de 3 años de experiencia en cocina francesa"
                   }
                 ],
-                "favorite": 0,
-                "apply": 1
+                "favorite": true,
+                "apply": false,
+                "educationlevel": "Universitario"
               }
             ]
             
