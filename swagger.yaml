@@ -188,6 +188,15 @@ The meta key is used to communicate extra information about the response to
 + name (string) - Languagelevel Name
 + description (string) - Languagelevel Description
 
+## Personalreference (object)
+
++ id (number) - Reference ID
++ name (string) - Reference Person Name
++ personalrelationship (string) - Personal Relationship
++ mobile (string) - Reference Mobile Number
++ telephone (string) - Reference Telephone Number
++ email (string) - Reference Email
+
 ## Profile (object)
 
 + photo (string) - User Photo
@@ -236,9 +245,10 @@ The meta key is used to communicate extra information about the response to
 + course (array[Course])
 + skill (array[Skill])
 + work (array[Work])
-+ reference (array[Reference])
++ workreference (array[Workreference])
++ personalreference (array[Personalreference])
 
-## Reference (object)
+## Workreference (object)
 
 + id (number) - Reference ID
 + name (string) - Reference Person Name
@@ -247,7 +257,7 @@ The meta key is used to communicate extra information about the response to
 + mobile (string) - Reference Mobile Number
 + telephone (string) - Reference Telephone Number
 + email (string) - Reference Email
-+ verified (number) - Reference is verified
++ verified (boolean) - Reference is verified
 
 ## Relationship (object)
 
@@ -1495,14 +1505,20 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                 "position": "CTO",
                 "activities": "Funciones cumplidas",
                 "daystart": "2005-05-10",
-                "dayend": "2007-02-01"
+                "dayend": "2007-02-01",
+                "country": "Colombia",
+                "countryAdmin1": "Cundinamarca",
+                "countryAdmin2": "Chía"
               },
               {
                 "company": "Empresas SA",
                 "position": "Recepcionista",
                 "activities": "Encargado de la recepción",
                 "daystart": "2014-12-31",
-                "dayend": "2015-12-31"
+                "dayend": "2015-12-31",
+                "country": "Colombia",
+                "countryAdmin1": "Cundinamarca",
+                "countryAdmin2": "Chía"
               }
             ],
             "workreference": [
@@ -2414,8 +2430,8 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
 + Response 404 (application/json)
 
 
-## /reference/
-User Work and Personal References
+## /workreference/
+User Work References
 
 
 ### GET
@@ -2428,7 +2444,7 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
 
 + Response 200 (application/json)
-    + Attributes (array[Reference])
+    + Attributes (array[Workreference])
             
 + Response 404 (application/json)
 
@@ -2464,7 +2480,7 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                 "mobile": "3124567890",
                 "telephone": "+57 1 444 5555",
                 "email": "jefe@empresa.com",
-                "verified": 0,
+                "verified": false,
                 "profilecompletion": {
                     "timestamp": 1462838400,
                     "percentage": 60,
@@ -2516,7 +2532,161 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                 "mobile": "3124567890",
                 "telephone": "+57 1 444 5555",
                 "email": "jefe@empresa.com",
-                "verified": 0,
+                "verified": false,
+                "profilecompletion": {
+                    "timestamp": 1462838400,
+                    "percentage": 60,
+                    "incomplete": [
+                        {
+                            "name": "Educación",
+                            "required": true
+                        },
+                        {
+                            "name": "Experiencia",
+                            "required": true
+                        }
+                    ]
+                }
+            }
+            
++ Response 404 (application/json)
+
+### DELETE
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "id": 12344
+            }
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "profilecompletion": {
+                    "timestamp": 1462838400,
+                    "percentage": 60,
+                    "incomplete": [
+                        {
+                            "name": "Educación",
+                            "required": true
+                        },
+                        {
+                            "name": "Experiencia",
+                            "required": true
+                        }
+                    ]
+                }
+            }
+            
++ Response 404 (application/json)
+
+## /personalreference/
+User Personal References
+
+
+### GET
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
++ Response 200 (application/json)
+    + Attributes (array[Personalreference])
+            
++ Response 404 (application/json)
+
+### POST
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "name": "Jose Cito",
+                "personalrelationship": "primo",
+                "mobile": "3124567890",
+                "telephone": "+57 1 444 5555",
+                "email": "jefe@empresa.com"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": 1235,
+                "name": "Jose Cito",
+                "personalrelationship": "primo",
+                "mobile": "3124567890",
+                "telephone": "+57 1 444 5555",
+                "email": "jefe@empresa.com",
+                "profilecompletion": {
+                    "timestamp": 1462838400,
+                    "percentage": 60,
+                    "incomplete": [
+                        {
+                            "name": "Educación",
+                            "required": true
+                        },
+                        {
+                            "name": "Experiencia",
+                            "required": true
+                        }
+                    ]
+                }
+            }
+            
++ Response 404 (application/json)
+
+### PUT
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+    
+    + Body
+    
+            {
+                "id": 1235,
+                "name": "Jose Cito",
+                "personalrelationship": "primo",
+                "mobile": "3124567890",
+                "telephone": "+57 1 444 5555",
+                "email": "jefe@empresa.com"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "id": 1235,
+                "name": "Jose Cito",
+                "personalrelationship": "primo",
+                "mobile": "3124567890",
+                "telephone": "+57 1 444 5555",
+                "email": "jefe@empresa.com",
+                "verified": false,
                 "profilecompletion": {
                     "timestamp": 1462838400,
                     "percentage": 60,
