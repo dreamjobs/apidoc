@@ -2286,7 +2286,32 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
 
 + Response 200 (application/json)
-    + Attributes (array[Work])
+    
+    + Body
+    
+            {
+                "id": 123,
+                "company": "Empresas SA",
+                "position": "Recepcionista",
+                "activities": "Encargado de la recepción",
+                "daystart": "2014-12-31",
+                "dayend": "2015-12-31",
+                "location": "12-43-3245",
+                "profilecompletion": {
+                    "timestamp": 1462838400,
+                    "percentage": 60,
+                    "incomplete": [
+                        {
+                            "name": "Educación",
+                            "required": true
+                        },
+                        {
+                            "name": "Experiencia",
+                            "required": true
+                        }
+                    ]
+                }
+            }
             
 + Response 404 (application/json)
 
