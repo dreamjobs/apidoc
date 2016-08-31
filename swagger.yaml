@@ -1666,7 +1666,7 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
 
 + Response 201 (application/json)
     
-    +Body
+    + Body
         
             {
                 "photo": null,
@@ -1745,7 +1745,7 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
 
 + Response 201 (application/json)
     
-    +Body
+    + Body
         
             {
                 "photo": null,
