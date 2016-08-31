@@ -1583,7 +1583,50 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
 
 + Response 200 (application/json)
-    + Attributes (Profile)
+    
+    + Body
+        
+            {
+                "photo": null,
+                "description": "el programmer",
+                "career": "Analista en Sistemas",
+                "birthday": "1982-07-14",
+                "citizenship": "colombiano",
+                "relationship": {
+                  "id": 1,
+                  "name": "Soltero"
+                },
+                "children": 2,
+                "gender": {
+                  "id": 1,
+                  "name": "Hombre"
+                },
+                "idtype": {
+                  "id": 1,
+                  "name": "Cédula de Ciudadanía"
+                },
+                "idnumber": 2933444,
+                "address": "Carrera 1 # 2 - 34",
+                "country": "12",
+                "countryAdmin1": "13",
+                "countryAdmin2": "2424",
+                "location": "12-13-2424",
+                "mobile": 320888222,
+                "telephone": 14445555,
+                "jobcategory": {
+                  "id": 2,
+                  "name": "Producción / Operaciones"
+                },
+                "workstatus": {
+                  "id": 1,
+                  "name": "Busqueda Activa"
+                },
+                "profilecompletion": {
+                  "timestamp": 1472679511,
+                  "percentage": 100,
+                  "incomplete": []
+                }
+            }
             
 + Response 404 (application/json)
 
@@ -1611,6 +1654,9 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                 "idtype_id": 1,
                 "idnumber": 0,
                 "address": "",
+                "country": "Colombia",
+                "countryAdmin1": "Bogota D.C.",
+                "countryAdmin2": "Bogota D.C.",
                 "location": "123-456-789",
                 "mobile": "",
                 "telephone": "",
@@ -1619,7 +1665,50 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             }
 
 + Response 201 (application/json)
-    + Attributes (Profile)
+    
+    +Body
+        
+            {
+                "photo": null,
+                "description": "el programmer",
+                "career": "Analista en Sistemas",
+                "birthday": "1982-07-14",
+                "citizenship": "colombiano",
+                "relationship": {
+                  "id": 1,
+                  "name": "Soltero"
+                },
+                "children": 2,
+                "gender": {
+                  "id": 1,
+                  "name": "Hombre"
+                },
+                "idtype": {
+                  "id": 1,
+                  "name": "Cédula de Ciudadanía"
+                },
+                "idnumber": 2933444,
+                "address": "Carrera 1 # 2 - 34",
+                "country": "12",
+                "countryAdmin1": "13",
+                "countryAdmin2": "2424",
+                "location": "12-13-2424",
+                "mobile": 320888222,
+                "telephone": 14445555,
+                "jobcategory": {
+                  "id": 2,
+                  "name": "Producción / Operaciones"
+                },
+                "workstatus": {
+                  "id": 1,
+                  "name": "Busqueda Activa"
+                },
+                "profilecompletion": {
+                  "timestamp": 1472679511,
+                  "percentage": 100,
+                  "incomplete": []
+                }
+            }
               
 + Response 404 (application/json)
 
@@ -1655,7 +1744,50 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             }
 
 + Response 201 (application/json)
-    + Attributes (Profile)
+    
+    +Body
+        
+            {
+                "photo": null,
+                "description": "el programmer",
+                "career": "Analista en Sistemas",
+                "birthday": "1982-07-14",
+                "citizenship": "colombiano",
+                "relationship": {
+                  "id": 1,
+                  "name": "Soltero"
+                },
+                "children": 2,
+                "gender": {
+                  "id": 1,
+                  "name": "Hombre"
+                },
+                "idtype": {
+                  "id": 1,
+                  "name": "Cédula de Ciudadanía"
+                },
+                "idnumber": 2933444,
+                "address": "Carrera 1 # 2 - 34",
+                "country": "12",
+                "countryAdmin1": "13",
+                "countryAdmin2": "2424",
+                "location": "12-13-2424",
+                "mobile": 320888222,
+                "telephone": 14445555,
+                "jobcategory": {
+                  "id": 2,
+                  "name": "Producción / Operaciones"
+                },
+                "workstatus": {
+                  "id": 1,
+                  "name": "Busqueda Activa"
+                },
+                "profilecompletion": {
+                  "timestamp": 1472679511,
+                  "percentage": 100,
+                  "incomplete": []
+                }
+            }
               
 + Response 404 (application/json)
 
