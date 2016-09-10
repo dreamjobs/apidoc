@@ -77,6 +77,7 @@ The meta key is used to communicate extra information about the response to
 + id (number) - Course ID
 + name (string) - Course Name
 + date (string) - Course Date
++ institution (string) - Institution
 
 ## Education (object)
 
@@ -1482,11 +1483,13 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             "course": [
               {
                 "name": "Microsoft Office 2005",
-                "date": "2014-12-31"
+                "date": "2014-12-31",
+                "institution": "Academia Uno"
               },
               {
                 "name": "Microsoft Server 2005",
-                "date": "2013-05-10"
+                "date": "2013-05-10",
+                "institution": "Academia Dos"
               }
             ],
             "skill": [
@@ -2291,7 +2294,8 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
     
             {
                 "name": "Curso de Mecánica Avanzada",
-                "date": "2015-12-31"
+                "date": "2015-12-31",
+                "institution": "Academia Uno"
             }
 
 + Response 200 (application/json)
@@ -2302,6 +2306,7 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                 "id": 1235
                 "name": "Curso de Mecánica Avanzada",
                 "date": "2015-12-31",
+                "institution": "Academia Uno",
                 "profilecompletion": {
                     "timestamp": 1462838400,
                     "percentage": 60,
@@ -2334,7 +2339,8 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             {
                 "id": 1235,
                 "name": "Curso de Mecánica Avanzada",
-                "date": "2015-12-31"
+                "date": "2015-12-31",
+                "institution": "Academia Uno"
             }
 
 + Response 200 (application/json)
@@ -2345,6 +2351,7 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                 "id": 1235
                 "name": "Curso de Mecánica Avanzada",
                 "date": "2015-12-31",
+                "institution": "Academia Uno",
                 "profilecompletion": {
                     "timestamp": 1462838400,
                     "percentage": 60,
