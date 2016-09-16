@@ -1447,6 +1447,7 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             "telephone": null,
             "jobcategory": "Producción / Operaciones",
             "workstatus": "Busqueda Activa",
+            "work_experience": true,
             "education": [
                 {
                     "educationlevel": "Bachiller",
@@ -1624,6 +1625,7 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                   "id": 1,
                   "name": "Busqueda Activa"
                 },
+                "work_experience": true,
                 "profilecompletion": {
                   "timestamp": 1472679511,
                   "percentage": 100,
@@ -1661,7 +1663,9 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                 "mobile": "",
                 "telephone": "",
                 "jobcategory_id": 32,
-                "workstatus_id": 1
+                "workstatus_id": 1,
+                "work_experience": true,
+                "salary_expectation": 1200000
             }
 
 + Response 201 (application/json)
@@ -1703,6 +1707,7 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                   "id": 1,
                   "name": "Busqueda Activa"
                 },
+                "work_experience": true,
                 "profilecompletion": {
                   "timestamp": 1472679511,
                   "percentage": 100,
@@ -1740,7 +1745,9 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                 "mobile": "",
                 "telephone": "",
                 "jobcategory_id": "32",
-                "workstatus_id": 1
+                "workstatus_id": 1,
+                "work_experience": true,
+                "salary_expectation": 1200000,
             }
 
 + Response 201 (application/json)
@@ -1782,6 +1789,7 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                   "id": 1,
                   "name": "Busqueda Activa"
                 },
+                "work_experience": true,
                 "profilecompletion": {
                   "timestamp": 1472679511,
                   "percentage": 100,
