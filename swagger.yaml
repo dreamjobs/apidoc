@@ -1430,6 +1430,9 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
 + Response 200 (application/json)
 
         {
+            "firstname": "Sebastian",
+            "lastname": "Perez",
+            "email": "email@example.com",
             "photo": "",
             "description": "el programmer",
             "career": "Analista en Sistemas",
@@ -1447,7 +1450,8 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             "telephone": null,
             "jobcategory": "Producción / Operaciones",
             "workstatus": "Busqueda Activa",
-            "work_experience": true,
+            "workexperience": true,
+            "salaryexpectation": 123456789,
             "education": [
                 {
                     "educationlevel": "Bachiller",
@@ -1557,19 +1561,33 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
             "personalreference": [
               {
                 "name": "Fabian Carrillo",
-                "personalrelationship": null,
+                "personalrelationship": "amigo",
                 "telephone": "4443333",
-                "mobile": "3208396946",
-                "email": "fabiancarrillo@eventsite.com"
+                "mobile": "320112222",
+                "email": "fc@eventsite.com"
               },
               {
                 "name": "Martina Perez",
-                "personalrelationship": null,
+                "personalrelationship": "hija",
                 "telephone": "5556666",
                 "mobile": "3108883333",
                 "email": "martuli@gmail.com"
               }
-            ]
+            ],
+            "profilecompletion": {
+                "timestamp": 1472679511,
+                "percentage": 95,
+                "incomplete": [
+                    {
+                        "name": "Educación",
+                        "required": true
+                    },
+                    {
+                        "name": "Experiencia",
+                        "required": true
+                    }
+                 ]
+            }
         }
 
 + Response 404 (application/json)
@@ -1625,7 +1643,8 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                   "id": 1,
                   "name": "Busqueda Activa"
                 },
-                "work_experience": true,
+                "workexperience": true,
+                "salaryexpectation": 123456789,
                 "profilecompletion": {
                   "timestamp": 1472679511,
                   "percentage": 100,
@@ -1664,8 +1683,8 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                 "telephone": "",
                 "jobcategory_id": 32,
                 "workstatus_id": 1,
-                "work_experience": true,
-                "salary_expectation": 1200000
+                "workexperience": true,
+                "salaryexpectation": 123456789
             }
 
 + Response 201 (application/json)
@@ -1707,7 +1726,8 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                   "id": 1,
                   "name": "Busqueda Activa"
                 },
-                "work_experience": true,
+                "workexperience": true,
+                "salaryexpectation": 123456789,
                 "profilecompletion": {
                   "timestamp": 1472679511,
                   "percentage": 100,
@@ -1746,8 +1766,8 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                 "telephone": "",
                 "jobcategory_id": "32",
                 "workstatus_id": 1,
-                "work_experience": true,
-                "salary_expectation": 1200000,
+                "workexperience": true,
+                "salaryexpectation": 123456789,
             }
 
 + Response 201 (application/json)
@@ -1789,7 +1809,8 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required)
                   "id": 1,
                   "name": "Busqueda Activa"
                 },
-                "work_experience": true,
+                "workexperience": true,
+                "salaryexpectation": 123456789,
                 "profilecompletion": {
                   "timestamp": 1472679511,
                   "percentage": 100,
