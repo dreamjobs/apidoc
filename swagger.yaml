@@ -327,6 +327,8 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required).
 
         [
             {
+                "id": 1212,
+                "status": 1,
                 "company": {
                     "name": "Empresa SA"
                 },
@@ -344,6 +346,46 @@ Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required).
                 "content": "Enviar Certificado de Altura",
             }
         ]
+
++ Response 304 (application/json)
+
+### POST
+Header `X-API-KEY` (required) and `X-ACCESS-TOKEN` (required).
+
++ Request
+    + Headers
+
+            X-API-KEY: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+            X-ACCESS-TOKEN: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+
+    + Body
+    
+            {
+                "id": "12332",
+                "status": 2
+            }
+    
++ Response 200 (application/json)
+
+        {
+            "id": 1212,
+            "status": 2,
+            "company": {
+                "name": "Empresa SA"
+            },
+            "user": {
+                "firstname": "Alfredo",
+                "lastname": "Caseros"
+            },
+            "job": {
+                "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "title": "Panadero",
+                "published_at": "2016-12-31",
+                "status": "1"
+            },
+            "title": "Favor enviar Certificados",
+            "content": "Enviar Certificado de Altura",
+        }
 
 + Response 304 (application/json)
 
